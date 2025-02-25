@@ -1,0 +1,19 @@
+# core dependencies
+langchain
+langchain_community
+ollama
+tiktoken
+
+# vector store
+chromadb
+
+# data processing
+pandas
+numpy
+
+# testing and logging
+pytest
+loguru
+
+# notebook support
+jupyter
