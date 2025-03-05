@@ -1,19 +1,24 @@
-from agent import create_agent  # Import the create_agent function directly
+from src.graph.workflow import build_agentic_workflow
+from src.agents.agent import create_agent_executor
 
 def main():
-    print("Agent Fi, your all-in-one Finance Agent to Provide You with the Most Up To Date Financial Analysis! (Type 'exit' or 'quit' to end chat)")
-
-    # Create the agent
-    fi_agent = create_agent()  # Call the create_agent function directly
-
+    workflow = build_agentic_workflow()
+    agent = create_agent_executor()
+    
+    print("🤖 FiAgent Assistant Initialized!")
     while True:
-        user_input = input("\nYou: ")
-        if user_input.lower() in ["exit", "quit"]:
-            print("👋 Pleased to have helped you with FiAgent. Goodbye!")
+        query = input("\n💬 User: ")
+        if query.lower() in ["exit", "quit"]:
             break
-        
-        response = fi_agent.run(user_input)
-        print(f"Agent Fin: {response}")
+        try:
+            graph_state = workflow.invoke({"question": query})
+            response = agent.invoke({
+                "input": graph_state["generation"],
+                "chat_history": agent.memory.buffer_as_str
+            })
+            print(f"\n🤖 FiAgent: {response['output']}")
+        except Exception as e:
+            print(f"⚠️ Error: {str(e)}")
 
 if __name__ == "__main__":
     main()

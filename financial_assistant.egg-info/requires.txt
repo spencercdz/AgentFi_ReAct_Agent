@@ -1,0 +1,7 @@
+langchain
+langgraph
+ollama
+yfinance
+duckduckgo-search
+tavily-python
+chromadb

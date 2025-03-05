@@ -4,6 +4,11 @@ langchain_community
 ollama
 tiktoken
 
+# apis
+yfinance
+duckduckgo-search
+wikipedia
+
 # vector store
 chromadb
 
