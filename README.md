@@ -60,7 +60,7 @@ By **modeling financial decision flows using LangGraph**, AgentFi enables more s
 | **Retrieval-Augmented Generation (RAG)** | Dynamic financial data retrieval |
 | **Matplotlib & Plotly** | Interactive financial data visualization |
 | **API Integrations** | Real-time stock price & market news retrieval |
-| 🖥**Python** | Backend logic, API handling & automation |
+| **Python** | Backend logic, API handling & automation |
 
 ---
 
