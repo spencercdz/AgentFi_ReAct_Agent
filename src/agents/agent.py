@@ -1,6 +1,6 @@
 from langchain.agents import initialize_agent, AgentType
 from langchain.memory import ConversationBufferMemory
-from langchain_community.chat_models import ChatOllama
+from langchain_ollama import ChatOllama
 from config.settings import LLM_MODEL
 from .tools import get_all_tools  # Import from your tools.py
 
@@ -17,13 +17,14 @@ def create_agent_executor():
     return initialize_agent(
         agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
         tools=tools,
-        llm=ChatOllama(model=LLM_MODEL),
+        llm=ChatOllama(model=LLM_MODEL,
+                       temperature = 1),
         verbose=True,
         memory=memory,
         handle_parsing_errors=True,
-        max_iterations=3,
+        max_iterations=10,
         agent_kwargs={
-            "prefix": """You are Financial Analyst Assistant. Use these tools in order:
+            "prefix": """You are Financial Analyst Assistant. Use these tools in any way that you like:
             1. Knowledge Base (first priority for financial concepts)
             2. Web Search (current market data)
             3. Stock Analysis (historical data)

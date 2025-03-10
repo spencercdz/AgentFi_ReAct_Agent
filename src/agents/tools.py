@@ -1,10 +1,11 @@
 # src/agents/tools.py
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, Union
 from langchain.tools import tool
 from langchain_community.tools import DuckDuckGoSearchRun, WikipediaQueryRun
 from langchain_community.utilities import WikipediaAPIWrapper
 from langchain_community.tools.tavily_search import TavilySearchResults
 import yfinance as yf
+from pydantic import BaseModel
 from datetime import datetime
 import logging
 import os
@@ -31,16 +32,26 @@ except Exception as e:
     logger.error(f"Failed to initialize Tavily: {str(e)}")
     tv_search = None
 
-@tool
-def web_search(query: str, max_results: int = 5) -> str:
-    """Perform web search using best available engine. Use for real-time information and market news."""
+class WebSearchInput(BaseModel):
+    query: Union[str, dict]
+
+@tool(args_schema=WebSearchInput)
+def web_search(query: str) -> str:
+    """Perform web search. Accepts either a search string or JSON object."""
     try:
-        if tv_search:  # Use Tavily if available
-            results = tv_search.invoke({"query": query})
-            return "\n".join([r["content"] for r in results[:max_results]])
-        else:  # Fallback to DuckDuckGo
-            search = DuckDuckGoSearchRun()
-            return search.run(query)[:max_results*1000]
+        # Handle structured input
+        if isinstance(query, dict):
+            actual_query = query.get("query", "")
+            max_results = query.get("max_results", 3)
+        else:
+            actual_query = query
+            max_results = 3
+
+        if tv_search:
+            results = tv_search.invoke({"query": actual_query})[:max_results]
+            return "\n".join([r["content"] for r in results])
+        else:
+            return DuckDuckGoSearchRun().run(actual_query)[:10000]
     except Exception as e:
         logger.error(f"Web search failed: {str(e)}")
         return f"Search error: {str(e)}"
@@ -74,8 +85,12 @@ def stock_analysis(input_str: str) -> Dict[str, Any]:
         if data.empty:
             return {"error": "No data found for given parameters"}
         
+        # Convert to proper types
+        close_series = data["Close"].astype(float)
+        volume_series = data["Volume"].astype(int)
+        
         # Calculate statistics
-        daily_returns = data["Close"].pct_change().dropna()
+        daily_returns = close_series.pct_change().dropna()
         
         return {
             "ticker": ticker,
@@ -83,9 +98,9 @@ def stock_analysis(input_str: str) -> Dict[str, Any]:
             "end_date": end,
             "csv_data": data.reset_index().to_csv(index=False),
             "stats": {
-                "mean_close": data["Close"].mean().item(),  # Convert numpy float to Python float
-                "max_volume": int(data["Volume"].max().item()),  # Convert numpy int to Python int
-                "daily_returns": daily_returns.tolist()  # Convert Series to list
+                "mean_close": float(close_series.mean()),
+                "max_volume": int(volume_series.max()),
+                "daily_returns": daily_returns.tolist()
             }
         }
     except Exception as e:
@@ -125,7 +140,9 @@ def get_all_tools() -> list:
 
 def tool_description() -> str:
     """Generate formatted tool descriptions for agent prompt"""
-    return "\n".join(
-        f"{tool.name}: {tool.description}"
-        for tool in get_all_tools()
-    )
+    return """\n
+    web_search: Perform web search. Input should be a search string or JSON like {"query": "search terms"}.
+    wikipedia_search: Access Wikipedia information. Input should be a search string.
+    stock_analysis: Analyze historical stock data. Input format: 'ticker, start_date, end_date'.
+    knowledge_base_query: Query financial knowledge base. Input should be a natural language question.
+    """

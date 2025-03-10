@@ -1,5 +1,5 @@
-from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import OllamaEmbeddings
+from langchain_chroma import Chroma
+from langchain_ollama import OllamaEmbeddings
 from config.settings import (
     PERSIST_DIRECTORY,
     EMBEDDING_MODEL,
