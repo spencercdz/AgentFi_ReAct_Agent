@@ -1,83 +1,117 @@
 # AgentFi (ReAct Agent) – Work in Progress  
 
-**AgentFi** is an intelligent financial assistant built using the **ReAct (Reasoning + Acting) framework**. It leverages **Ollama** and **LangChain** to provide enhanced financial insights, execute queries efficiently, and integrate **Retrieval-Augmented Generation (RAG)** for contextual responses.  
+**AgentFi** is an AI-powered financial assistant that leverages the **ReAct (Reasoning + Acting) framework** with **LangGraph** for structured decision-making. Designed for financial analysis, stock valuation, and market insights, AgentFi integrates **Ollama embeddings, Retrieval-Augmented Generation (RAG), and real-time API calls** to provide deep, data-driven insights.  
+
+By **modeling financial decision flows using LangGraph**, AgentFi enables more structured reasoning, allowing it to select the best tools dynamically for answering queries.  
+
+---
 
 ## Key Features  
 
-- **ReAct Agent Architecture:**  
-  Uses the **ReAct framework** to combine reasoning and acting for better decision-making.  
+### **State-Based Decision Modeling with LangGraph**  
+- **LangGraph maps out the agent’s decision states**, allowing structured tool selection.  
+- Models financial workflows, such as **data retrieval, valuation, and forecasting**.  
+- Enables **multi-step reasoning** where decisions influence the next action dynamically.  
 
-- **Retrieval-Augmented Generation (RAG):**  
-  Implements **RAG** to improve answer accuracy by fetching relevant data dynamically.  
+### **Retrieval-Augmented Generation (RAG) for Market Data**  
+- Implements **RAG** to fetch relevant **financial documents, earnings reports, and industry trends**.  
+- Supports **vector search** using **Ollama embeddings** for better contextual retrieval.  
 
-- **Ollama Embeddings with LangChain:**  
-  Integrates **Ollama embeddings** to enhance vector search capabilities in LangChain.  
+### **Ollama Embeddings for Enhanced Understanding**  
+- Uses **high-dimensional vector search** for better recall of financial insights.  
+- Enhances **multi-document summarization** to extract key market signals.  
 
-- **Financial Data Processing:**  
-  Designed to analyze financial datasets, interpret trends, and provide insights.  
+### **DCF Valuation & Market Analysis**  
+- Computes **Discounted Cash Flow (DCF) valuations** for stock analysis.  
+- Supports **industry and macroeconomic trend analysis**.  
 
-- **API Integration:**  
-  Supports **external API calls** for real-time stock data, financial news, and macroeconomic indicators.  
+### **API-Driven Real-Time Data Fetching**  
+- Fetches **live stock prices, economic indicators, and news sentiment** via APIs.  
+- Supports **Yahoo Finance (yfinance), and custom data sources**.  
+
+---
 
 ## Planned Enhancements  
 
-- **Interactive Visualizations:**  
-  Implement **Matplotlib** and **Plotly** for graphing stock trends and analysis results.  
+### **Interactive Graphing with Matplotlib & Plotly**  
+- Visualize **stock trends, volatility, and financial ratios** dynamically.  
+- Create **candlestick charts**, **moving averages**, and **correlation matrices**.  
 
-- **Advanced Predictive Analytics:**  
-  Use **machine learning models** to forecast stock movements based on historical data.  
+### **AI-Driven Market Forecasting**  
+- Train **machine learning models (LSTMs, Random Forests, XGBoost)** for predictive analytics.  
+- Detect **trends, anomalies, and future price movements** based on historical data.  
 
-- **Enhanced Memory & Context Handling:**  
-  Improve long-term memory to store past interactions for a better user experience.  
+### **Memory & Persistent Context Tracking**  
+- Store **past queries and financial insights** for better user interaction.  
+- Implement **LangGraph’s memory tracking** to **preserve decision states** between sessions.  
 
-- **Database Integration:**  
-  Store and retrieve financial insights efficiently using a database backend.  
+### **SQL/NoSQL Database Integration**  
+- Store **historical stock performance, user queries, and investment recommendations**.  
+- Enable **fast indexing and retrieval of financial insights**.  
+
+---
 
 ## Technologies Used  
 
-- **LangChain & LangGraph** – For building modular AI-powered workflows.  
-- **Ollama** – Enhances embeddings and retrieval efficiency.  
-- **RAG (Retrieval-Augmented Generation)** – Improves financial data retrieval.  
-- **API Integrations** – Fetches real-time stock prices, news, and macroeconomic indicators.  
-- **Python** – Core programming language for AI, API handling, and automation.  
+| **Technology**  | **Purpose** |
+|---------------|------------|
+| **LangChain & LangGraph** | AI agent reasoning & decision modeling |
+| **Ollama Embeddings** | Semantic search & document understanding |
+| **Retrieval-Augmented Generation (RAG)** | Dynamic financial data retrieval |
+| **Matplotlib & Plotly** | Interactive financial data visualization |
+| **API Integrations** | Real-time stock price & market news retrieval |
+| 🖥**Python** | Backend logic, API handling & automation |
+
+---
 
 ## How It Works  
 
-1. **User Query:**  
-   - The user inputs a financial question (e.g., *"What is the DCF valuation for Tesla?"*).  
+**1) User Query Processing**  
+   - User submits a request (e.g., *"What is the fair value of Tesla using DCF?"*).  
 
-2. **Data Retrieval (RAG):**  
-   - Relevant data is pulled using **RAG** from APIs, databases, and financial documents.  
+**2) State Modeling via LangGraph**  
+   - LangGraph **determines the required tools** (e.g., data retrieval, valuation, sentiment analysis).  
+   - The agent follows a **decision flow** to pick the best approach.  
 
-3. **Ollama + LangChain Processing:**  
-   - **Ollama embeddings** enhance understanding, and **LangChain** structures responses logically.  
+**3) Data Retrieval (RAG & APIs)**  
+   - Fetches **real-time stock data, financial reports, and macroeconomic indicators**.  
 
-4. **ReAct Agent Execution:**  
-   - The **ReAct Agent** reasons through the query and takes action accordingly.  
+**4) Processing with LangChain & Ollama**  
+   - Uses **Ollama embeddings** to enhance **financial document comprehension**.  
+   - **ReAct Agent executes multi-step reasoning** to generate structured insights.  
 
-5. **Final Response:**  
-   - The agent returns a well-structured financial insight, supported by data.  
+**5) Final Response & Visualization**  
+   - Outputs **detailed valuation metrics, market trends, and stock performance graphs**.  
 
-## Challenges Encountered  
+---
 
-- **Optimizing Response Speed:**  
-  - Ensuring fast execution while processing large financial datasets.  
+## 🛠Challenges Encountered  
 
-- **Improving Reasoning & Acting Balance:**  
-  - Fine-tuning the **ReAct Agent** for more precise decision-making.  
+### **Optimizing Decision Flow in LangGraph**  
+- Fine-tuning **decision states** to **maximize efficiency and accuracy**.  
+- Ensuring **dynamic tool selection without unnecessary computational overhead**.  
 
-- **Efficient API Usage:**  
-  - Handling rate limits and optimizing API calls for real-time stock data.  
+### **Balancing Model Complexity & Speed**  
+- Keeping **financial reasoning deep** without slowing down response time.  
+- Managing **large-scale embeddings for high-dimensional data retrieval**.  
 
-## What’s Next  
+### **Handling API Rate Limits**  
+- Implementing **efficient caching strategies** to **minimize redundant API calls**.  
 
-- **AI-Powered Portfolio Recommendations:**  
-  - Generate **personalized investment strategies** based on user input.  
+---
 
-- **Sentiment Analysis for Market Trends:**  
-  - Analyze **news sentiment** and its impact on stocks.  
+## What’s Next for AgentFi?  
 
-- **Persistent Memory Storage:**  
-  - Implement a database to **store user queries and past insights**.  
+### **AI-Powered Portfolio Optimization**  
+- Generate **personalized investment recommendations** based on risk tolerance.  
+- Use **factor analysis** to **optimize stock weightings in a portfolio**.  
 
-For any questions or collaborations, contact **Spencer** at [your email/contact details].  
+### **Sentiment Analysis & Market Trends**  
+- Analyze **news sentiment and social media signals** for trading insights.  
+- Implement **NLP-based earnings call analysis**.  
+
+### **Long-Term Memory & Context Awareness**  
+- Store **historical analysis and recommendations** for enhanced decision support.  
+- Implement **continuous learning** for adapting to **market trends**.  
+
+---
