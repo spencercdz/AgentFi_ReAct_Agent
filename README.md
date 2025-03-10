@@ -85,7 +85,7 @@ By **modeling financial decision flows using LangGraph**, AgentFi enables more s
 
 ---
 
-## 🛠Challenges Encountered  
+## Challenges Encountered  
 
 ### **Optimizing Decision Flow in LangGraph**  
 - Fine-tuning **decision states** to **maximize efficiency and accuracy**.  
