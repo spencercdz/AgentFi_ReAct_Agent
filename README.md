@@ -19,7 +19,7 @@
 - **API Integration:**  
   Supports **external API calls** for real-time stock data, financial news, and macroeconomic indicators.  
 
-## 🔧 Planned Enhancements  
+## Planned Enhancements  
 
 - **Interactive Visualizations:**  
   Implement **Matplotlib** and **Plotly** for graphing stock trends and analysis results.  
@@ -41,7 +41,7 @@
 - **API Integrations** – Fetches real-time stock prices, news, and macroeconomic indicators.  
 - **Python** – Core programming language for AI, API handling, and automation.  
 
-## 🔍 How It Works  
+## How It Works  
 
 1. **User Query:**  
    - The user inputs a financial question (e.g., *"What is the DCF valuation for Tesla?"*).  
