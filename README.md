@@ -35,7 +35,7 @@
 
 ## Technologies Used  
 
-- **LangChain** – For building modular AI-powered workflows.  
+- **LangChain & LangGraph** – For building modular AI-powered workflows.  
 - **Ollama** – Enhances embeddings and retrieval efficiency.  
 - **RAG (Retrieval-Augmented Generation)** – Improves financial data retrieval.  
 - **API Integrations** – Fetches real-time stock prices, news, and macroeconomic indicators.  
